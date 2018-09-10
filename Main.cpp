@@ -107,17 +107,22 @@ int main()
 				if (buttonSprite.getGlobalBounds().contains(gameEvent.mouseButton.x, gameEvent.mouseButton.y));
 				{
 					clickSound.play();
+					
+				
 
+				if (playing == true)
+				{
+					score = score + 1;
+				}
+				else
+				{
+					playing = true;
 
+					//restart game
+					score = 0;
+					timeRemaining = timeLimit;
+				}
 
-					if (playing == true)
-					{
-						score = score + 1;
-					}
-					else
-					{
-						playing = true;
-					}
 				}
 			}
 			//check if the event is the closed event
