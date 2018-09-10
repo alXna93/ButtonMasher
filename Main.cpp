@@ -85,6 +85,14 @@ int main()
 	//track whether player is playing
 	bool playing = false;
 
+	//Prompt Text
+	sf::Text promptText;
+	promptText.setFont(gameFont);
+	promptText.setString("Click the button to start the game!");
+	promptText.setCharacterSize(16);
+	promptText.setFillColor(sf::Color::White);
+	promptText.setPosition(gameWindow.getSize().x / 2 - promptText.getLocalBounds().width / 2, 300);
+
 	//----------------------------------------------------------
 	//Game Loop
 	//Runs every frame until the game window is closed
@@ -119,6 +127,7 @@ int main()
 					playing = true;
 
 					//restart game
+					promptText.setString("Click the button as fast as you can!!");
 					score = 0;
 					timeRemaining = timeLimit;
 				}
@@ -148,11 +157,13 @@ int main()
 			{
 				//set playing to false
 				playing = false;
+				//update prompt
+				promptText.setString("Your final score was: " + std::to_string((int)timeRemaining.asSeconds()) + ". Click the button to start a new game!");
 			}
 		}
 				//update prompt
 		timerText.setString("Time Remaining: " + std::to_string((int)timeRemaining.asSeconds()));
-
+		scoreText.setString("Score: " + std::to_string(score));
 		//Draw graphics
 
 		//Clear the window to a single colour
@@ -166,6 +177,7 @@ int main()
 		gameWindow.draw(authorText);
 		gameWindow.draw(scoreText);
 		gameWindow.draw(timerText);
+		gameWindow.draw(promptText);
 
 		//Display the window contents on the screen
 		gameWindow.display();
