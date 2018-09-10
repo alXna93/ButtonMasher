@@ -80,13 +80,21 @@ int main()
 	//----------------------------------------------------------
 	while (gameWindow.isOpen())
 	{
-		
+		//-----------------------------------------------------
 		//Check for input
+		//-----------------------------------------------------
+
 		sf::Event gameEvent;
 		while (gameWindow.pollEvent(gameEvent))
 		{
 			//process events
-
+			if (gameEvent.type == sf::Event::MouseButtonPressed)
+			{
+				if (buttonSprite.getGlobalBounds().contains(gameEvent.mouseButton.x, gameEvent.mouseButton.y));
+				{
+					score = score + 1;
+				}
+			}
 			//check if the event is the closed event
 			if (gameEvent.type == sf::Event::Closed)
 			{
