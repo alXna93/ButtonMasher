@@ -1,6 +1,7 @@
 //included libraries
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 
 //entry point for program
@@ -11,9 +12,51 @@ int main()
 	gameWindow.create(sf::VideoMode::getDesktopMode(), "Button Masher", 
 		sf ::Style::Titlebar | sf::Style::Close);
 
+	//----------------------------------------------------------
+	//Game Setup
+	//----------------------------------------------------------
+	sf::Texture buttonTexture;
+	buttonTexture.loadFromFile("graphics/button.png");
 
+	sf::Sprite buttonSprite;
+	buttonSprite.setTexture(buttonTexture);
+
+	buttonSprite.setPosition(gameWindow.getSize().x / 2 - buttonTexture.getSize().x / 2,
+		gameWindow.getSize().y / 2 - buttonTexture.getSize().y / 2);
+
+	//Audio
+	sf::Music gameMusic;
+
+	//load audio from file
+	gameMusic.openFromFile("audio/music.ogg");
+	//play music
+	gameMusic.play();
+
+	//Title text
+	sf::Font gameFont;
+	gameFont.loadFromFile("fonts/mainFont.ttf");
+	sf::Text titleText;
+	titleText.setFont(gameFont);
+	titleText.setString("Button Masher!");
+	titleText.setCharacterSize(34);
+	titleText.setFillColor(sf::Color::Cyan);
+	titleText.setStyle(sf::Text::Bold | sf::Text::Italic);
+	titleText.setPosition(gameWindow.getSize().x / 2 - titleText.getLocalBounds().width / 2, 150);
+
+	//Author Text
+	sf::Text authorText;
+	authorText.setFont(gameFont);
+	authorText.setString("by Alana McDowall!");
+	authorText.setCharacterSize(24);
+	authorText.setFillColor(sf::Color::Cyan);
+	authorText.setStyle(sf::Text::Bold);
+	authorText.setPosition(gameWindow.getSize().x / 2 - authorText.getLocalBounds().width / 2, 250);
+
+
+	//----------------------------------------------------------
 	//Game Loop
 	//Runs every frame until the game window is closed
+	//----------------------------------------------------------
 	while (gameWindow.isOpen())
 	{
 		
@@ -33,7 +76,26 @@ int main()
 
 		//TODO: Update game state
 
-		//TODO: Draw graphics
+		//Draw graphics
+
+		//Clear the window to a single colour
+		gameWindow.clear(sf::Color(128, 128, 128));
+
+		//Draw everything to the window
+		gameWindow.draw(buttonSprite);
+
+		//draw text
+		gameWindow.draw(titleText);
+		gameWindow.draw(authorText);
+
+		//Display the window contents on the screen
+		gameWindow.display();
+
+		
+
+		//TODO: Draw more stuff
+
+
 	}
 
 	//exit point for program
