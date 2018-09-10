@@ -74,6 +74,14 @@ int main()
 	sf::Time timeRemaining = timeLimit;
 	sf::Clock gameClock;
 
+	//click sound effect
+	sf::SoundBuffer clickBuffer;
+	//tell the click sound buffer where file is
+	clickBuffer.loadFromFile("audio/buttonclick.ogg");
+
+	sf::Sound clickSound;
+	clickSound.setBuffer(clickBuffer);
+
 	//----------------------------------------------------------
 	//Game Loop
 	//Runs every frame until the game window is closed
@@ -88,10 +96,14 @@ int main()
 		while (gameWindow.pollEvent(gameEvent))
 		{
 			//process events
+
+			//check if player clicked mouse
 			if (gameEvent.type == sf::Event::MouseButtonPressed)
 			{
+				//did player click on the button
 				if (buttonSprite.getGlobalBounds().contains(gameEvent.mouseButton.x, gameEvent.mouseButton.y));
 				{
+					clickSound.play();
 					score = score + 1;
 				}
 			}
