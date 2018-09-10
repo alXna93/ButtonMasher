@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include <string>
 
 
 //entry point for program
@@ -56,7 +57,7 @@ int main()
 	int score = 0;
 	sf::Text scoreText;
 	scoreText.setFont(gameFont);
-	scoreText.setString("Score: 0");
+	scoreText.setString("Score: " + std::to_string(score));
 	scoreText.setCharacterSize(16);
 	scoreText.setFillColor(sf::Color::White);
 	scoreText.setPosition(30, 30);
