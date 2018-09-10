@@ -53,7 +53,7 @@ int main()
 	authorText.setStyle(sf::Text::Bold);
 	authorText.setPosition(gameWindow.getSize().x / 2 - authorText.getLocalBounds().width / 2, 250);
 
-	//score
+	//score text
 	int score = 0;
 	sf::Text scoreText;
 	scoreText.setFont(gameFont);
@@ -61,6 +61,14 @@ int main()
 	scoreText.setCharacterSize(16);
 	scoreText.setFillColor(sf::Color::White);
 	scoreText.setPosition(30, 30);
+
+	//timer text
+	sf::Text timerText;
+	timerText.setFont(gameFont);
+	timerText.setString("Time Remaining: 0");
+	timerText.setCharacterSize(16);
+	timerText.setFillColor(sf::Color::White);
+	timerText.setPosition(gameWindow.getSize().x - timerText.getLocalBounds().width - 30, 30);
 
 	//----------------------------------------------------------
 	//Game Loop
@@ -85,6 +93,10 @@ int main()
 
 		//TODO: Update game state
 
+		//score
+	
+		scoreText.setString("Score: " + std::to_string(score));
+
 		//Draw graphics
 
 		//Clear the window to a single colour
@@ -97,6 +109,7 @@ int main()
 		gameWindow.draw(titleText);
 		gameWindow.draw(authorText);
 		gameWindow.draw(scoreText);
+		gameWindow.draw(timerText);
 
 		//Display the window contents on the screen
 		gameWindow.display();
