@@ -82,6 +82,9 @@ int main()
 	sf::Sound clickSound;
 	clickSound.setBuffer(clickBuffer);
 
+	//track whether player is playing
+	bool playing = false;
+
 	//----------------------------------------------------------
 	//Game Loop
 	//Runs every frame until the game window is closed
@@ -104,7 +107,17 @@ int main()
 				if (buttonSprite.getGlobalBounds().contains(gameEvent.mouseButton.x, gameEvent.mouseButton.y));
 				{
 					clickSound.play();
-					score = score + 1;
+
+
+
+					if (playing == true)
+					{
+						score = score + 1;
+					}
+					else
+					{
+						playing = true;
+					}
 				}
 			}
 			//check if the event is the closed event
@@ -122,7 +135,17 @@ int main()
 
 		//timer
 		sf::Time frameTime = gameClock.restart();
-		timeRemaining = timeRemaining - frameTime;
+		if (playing == true)
+		{
+			timeRemaining = timeRemaining - frameTime;
+
+			if (timeRemaining.asSeconds() <= 0)
+			{
+				//set playing to false
+				playing = false;
+			}
+		}
+				//update prompt
 		timerText.setString("Time Remaining: " + std::to_string((int)timeRemaining.asSeconds()));
 
 		//Draw graphics
