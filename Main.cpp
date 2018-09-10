@@ -52,6 +52,14 @@ int main()
 	authorText.setStyle(sf::Text::Bold);
 	authorText.setPosition(gameWindow.getSize().x / 2 - authorText.getLocalBounds().width / 2, 250);
 
+	//score
+	int score = 0;
+	sf::Text scoreText;
+	scoreText.setFont(gameFont);
+	scoreText.setString("Score: 0");
+	scoreText.setCharacterSize(16);
+	scoreText.setFillColor(sf::Color::White);
+	scoreText.setPosition(30, 30);
 
 	//----------------------------------------------------------
 	//Game Loop
@@ -87,6 +95,7 @@ int main()
 		//draw text
 		gameWindow.draw(titleText);
 		gameWindow.draw(authorText);
+		gameWindow.draw(scoreText);
 
 		//Display the window contents on the screen
 		gameWindow.display();
