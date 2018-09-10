@@ -70,6 +70,10 @@ int main()
 	timerText.setFillColor(sf::Color::White);
 	timerText.setPosition(gameWindow.getSize().x - timerText.getLocalBounds().width - 30, 30);
 
+	sf::Time timeLimit = sf::seconds(10.0f);
+	sf::Time timeRemaining = timeLimit;
+	sf::Clock gameClock;
+
 	//----------------------------------------------------------
 	//Game Loop
 	//Runs every frame until the game window is closed
@@ -94,8 +98,12 @@ int main()
 		//TODO: Update game state
 
 		//score
-	
 		scoreText.setString("Score: " + std::to_string(score));
+
+		//timer
+		sf::Time frameTime = gameClock.restart();
+		timeRemaining = timeRemaining - frameTime;
+		timerText.setString("Time Remaining: " + std::to_string((int)timeRemaining.asSeconds()));
 
 		//Draw graphics
 
